@@ -83,8 +83,9 @@ class Solver:
             step = np.matmul(q, p)
             x = x - step.flatten()
             # Termination criteria
-            if self.stopping_criterion(step, x) > 0:
-                return [i-1, cnt]
+            root = self.stopping_criterion(step, x)
+            if root > 0:
+                return [root - 1, cnt]
             # print("{cur_x} - {cnt}".format(cur_x=x.flatten(), cnt=cnt))
         return [-1, self.ITERATION_LIMIT]
 
@@ -98,8 +99,9 @@ class Solver:
             step = np.matmul(q, p)
             x = x - step.flatten()
             # Termination criteria
-            if self.stopping_criterion(step, x) > 0:
-                return [i - 1, cnt]
+            root = self.stopping_criterion(step, x)
+            if root > 0:
+                return [root - 1, cnt]
             # print("{cur_x} - {cnt}".format(cur_x=x.flatten(), cnt=cnt))
         return [-1, self.ITERATION_LIMIT]
 
@@ -111,7 +113,6 @@ class Solver:
         if (np.linalg.norm(step)+np.linalg.norm(self.system(x)))< self.TOLERANCE:
             for i,ii in enumerate(np.linalg.norm(self.valid_roots-x,axis=1)):
                 if ii<self.TOLERANCE:
-                    print(i+1)
                     return i+1
         return 0
 

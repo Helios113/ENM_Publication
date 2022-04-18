@@ -29,5 +29,5 @@ class ProgressBar:
         bar = self.fill * filled_length + '-' * (self.length - filled_length)
         print(f'\r{self.prefix} |{bar}| {percent}% {self.suffix}', end=self.print_end)
         # Print New Line on Complete
-        if self == self.total:
+        if iteration == self.total:
             print()

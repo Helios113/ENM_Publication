@@ -18,7 +18,7 @@ def do_test():
     method = SolverTypes.ENM
 
     # Limit number of iterations
-    ITERATION_LIMIT = 10
+    ITERATION_LIMIT = 50
 
     # Valid roots
     valid_roots = np.array([[1,2.7182818284590455],[0,-5]])
@@ -27,15 +27,15 @@ def do_test():
     solver = Solver(l, method,valid_roots, iteration_limit=ITERATION_LIMIT)
 
     # Beginning and end of the test range
-    start = 0
+    start = -1
     stop = 3
 
     # average of roots
     center_x = 1
-    center_y = 1
+    center_y = 2.7
 
     # Number of points between start and stop
-    n = 3
+    n = 100
 
     # Choice of c
     c = np.array([2, 3])
@@ -51,13 +51,12 @@ def do_test():
             progress_bar.draw(i * n + j + 1, )
             x = np.array([ii, jj])
             res = solver.run(x, c)
-            print(res)
             result_array[i, j, :] = res
 
     name = "Test1" + " Iter_Lim_{lim} range_x_{rangex} range_y_{rangey}.npy".format(lim=ITERATION_LIMIT,rangex=[start+center_x, stop+center_x],rangey=[start+center_y, stop+center_y])
     with open(FILE_PATH / name, "w+") as file:
         np.save(FILE_PATH / name, result_array)
-    print(result_array)
+
 
 if __name__ == "__main__":
     do_test()
