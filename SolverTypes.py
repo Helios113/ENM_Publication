@@ -2,5 +2,10 @@ from enum import Enum
 
 
 class SolverTypes(Enum):
-    ENM = 1
-    NM = 2
+    ENM = "ENM"
+    NM = "NM"
+    Powell = "Powell"
+    LM = "LM"
+    Broyden = "Broyden"
+    EBM = "EBM"
+    ELM = "ELM"
